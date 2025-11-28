@@ -13,7 +13,7 @@ class RacingGameTest {
 
     @BeforeEach
     void setUp() {
-        car = new Car("test");
+        car = new Car(new CarName("test"), 0);
     }
 
     @Test
