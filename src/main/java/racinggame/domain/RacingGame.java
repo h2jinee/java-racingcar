@@ -1,29 +1,27 @@
 package racinggame.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static racinggame.domain.CarFactory.createCars;
 import static racinggame.view.OutputView.getPositionDisplay;
 
 public class RacingGame {
 
     private final List<Car> cars;
-    private final int tryCount;
+    private final TryCount tryCount;
 
     public RacingGame(List<Car> cars, int tryCount) {
-        this.cars = new ArrayList<>(cars);
-        this.tryCount = tryCount;
+        this(cars, new TryCount(tryCount));
     }
 
-    public RacingGame(String carNames, int tryCount) {
-        this(createCars(carNames), tryCount);
+    public RacingGame(List<Car> cars, TryCount tryCount) {
+        this.cars = cars;
+        this.tryCount = tryCount;
     }
 
     public void play() {
         System.out.println("실행 결과");
 
-        for (int i = 0; i < tryCount; i++) {
+        for (int i = 0; i < tryCount.getTryCount(); i++) {
             playRound();
             System.out.println();
         }
@@ -31,7 +29,7 @@ public class RacingGame {
 
     public void playRound() {
         for (Car car : cars) {
-            car.move(generateRandomNumber());
+            car.move(new RandomNumber(generateRandomNumber()));
             System.out.println(getPositionDisplay(car));
         }
 

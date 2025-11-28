@@ -2,6 +2,7 @@ package racinggame;
 
 import racinggame.domain.RacingGame;
 
+import static racinggame.domain.CarFactory.createCars;
 import static racinggame.view.InputView.*;
 import static racinggame.view.OutputView.*;
 
@@ -11,7 +12,7 @@ public class RacingMain {
         String carNames = getCarNames();
         int tryCount = getTryCount();
 
-        RacingGame racingGame = new RacingGame(carNames, tryCount);
+        RacingGame racingGame = new RacingGame(createCars(carNames), tryCount);
         racingGame.play();
         printWinners(racingGame);
     }

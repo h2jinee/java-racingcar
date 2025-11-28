@@ -28,7 +28,7 @@ class RacingGameTest {
     void moveForward_WhenNumberIsFourOrMore(int expected) {
         int position = car.getPosition();
 
-        car.move(expected);
+        car.move(new RandomNumber(expected));
 
         assertThat(car.getPosition()).isEqualTo(position + 1);
     }
@@ -39,7 +39,7 @@ class RacingGameTest {
     void doNotMove_WhenNumberIsLessThanFour(int expected) {
         int position = car.getPosition();
 
-        car.move(expected);
+        car.move(new RandomNumber(expected));
 
         assertThat(car.getPosition()).isEqualTo(position);
     }
@@ -48,9 +48,9 @@ class RacingGameTest {
     @ValueSource(ints = {0, 3})
     @DisplayName("자동차가 전진하지 않았을 때 빈 문자열을 반환한다")
     void returnEmptyString_WhenNotMoved(int expected) {
-        car.move(expected);
+        car.move(new RandomNumber(expected));
 
-        assertThat(car.move(expected)).isEqualTo("test : ");
+        assertThat(car.move(new RandomNumber(expected))).isEqualTo("test : ");
     }
 
     @ParameterizedTest
@@ -58,7 +58,7 @@ class RacingGameTest {
     @DisplayName("자동차가 전진했을 때 위치에 해당하는 개수만큼 '-'를 반환한다")
     void returnDashes_WhenMoved(int expected) {
         for (int i = 1; i <= expected; i++) {
-            car.move(expected);
+            car.move(new RandomNumber(expected));
         }
 
         assertThat("-".repeat(car.getPosition())).isEqualTo("-".repeat(expected));
@@ -68,7 +68,7 @@ class RacingGameTest {
     @DisplayName("자동차가 여러 번 전진하면 전진한 횟수만큼 위치가 증가한다")
     void addPosition_WhenMovedMultipleTimes() {
         for (int i = 1; i <= 5; i++) {
-            car.move(4);
+            car.move(new RandomNumber(4));
         }
 
         assertThat(car.getPosition()).isEqualTo(5);
@@ -78,6 +78,6 @@ class RacingGameTest {
     @ValueSource(ints = {-1, 10, 100})
     @DisplayName("입력 값이 허용된 수가 아닐 경우 IllegalArgumentException 예외를 발생시킨다")
     void throwException_WhenNumberIsOutOfRange(int expected) {
-        assertThatThrownBy(() -> car.move(expected)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> car.move(new RandomNumber(expected))).isInstanceOf(IllegalArgumentException.class);
     }
 }

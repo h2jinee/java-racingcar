@@ -46,7 +46,7 @@ public class CarTest {
     void moveForward_WhenNumberIsFourOrMore(int number) {
         Car car = new Car(new CarName("test"), 0);
 
-        car.move(number);
+        car.move(new RandomNumber(number));
 
         assertThat(car.getPosition()).isEqualTo(1);
 
@@ -58,7 +58,7 @@ public class CarTest {
     void doNotMove_WhenNumberIsLessThanFour(int number) {
         Car car = new Car(new CarName("test"), 0);
 
-        car.move(number);
+        car.move(new RandomNumber(number));
 
         assertThat(car.getPosition()).isEqualTo(0);
     }
@@ -69,7 +69,7 @@ public class CarTest {
         Car car = new Car(new CarName("test"), 0);
 
         for (int i = 0; i < 5; i++) {
-            car.move(4);
+            car.move(new RandomNumber(4));
         }
 
         assertThat(car.getPosition()).isEqualTo(5);
@@ -82,7 +82,7 @@ public class CarTest {
     void throwException_WhenNumberIsOutOfRange(int number) {
         Car car = new Car(new CarName("test"), 0);
 
-        assertThatThrownBy(() -> car.move(number)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> car.move(new RandomNumber(number))).isInstanceOf(IllegalArgumentException.class);
 
     }
 }

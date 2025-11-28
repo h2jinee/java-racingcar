@@ -25,16 +25,9 @@ public class Car {
         this.position = position;
     }
 
-    public String move(int number) {
-        validateNumber(number);
-        this.position = this.position.move(number);
+    public String move(RandomNumber randomNumber) {
+        this.position = this.position.move(randomNumber);
         return getPositionDisplay(this);
-    }
-
-    private void validateNumber(int number) {
-        if (number < MIN_MOVE_NUMBER || number > MAX_MOVE_NUMBER) {
-            throw new IllegalArgumentException("0부터 9까지의 숫자만 입력할 수 있습니다.");
-        }
     }
 
     public boolean isWinnerWith(int targetPosition) {

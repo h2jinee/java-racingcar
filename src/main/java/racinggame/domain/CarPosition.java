@@ -3,24 +3,19 @@ package racinggame.domain;
 public class CarPosition {
 
     private static final int MIN_POSITION = 0;
-    private static final int MOVE_THRESHOLD = 4;
     private final int position;
 
     public CarPosition(int position) {
+        validatePosition(position);
         this.position = position;
-    }
-
-    public CarPosition() {
-        this(MIN_POSITION);
     }
 
     public int getPosition() {
         return position;
     }
 
-    public CarPosition move(int randomValue) {
-        validatePosition(randomValue);
-        if (randomValue >= MOVE_THRESHOLD) {
+    public CarPosition move(RandomNumber randomValue) {
+        if (randomValue.isMovable()) {
             return new CarPosition(this.position + 1);
         }
         return this;
